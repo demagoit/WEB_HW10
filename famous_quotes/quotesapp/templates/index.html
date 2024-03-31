@@ -1,25 +1,89 @@
 {% extends "base.html" %}
-{% load quote_extract %}
+{% load quote_extras %}
 {% block content %}
-{% for quote in quotes %}
-<div class="quote" itemscope itemtype="http://schema.org/CreativeWork">
-    <span class="text" itemprop="text">{{ quote.quote }}</span>
-    <span>by <small class="author" itemprop="author">{{ quote.author|author }}</small>
-    <!-- <span>by <small class="author" itemprop="author">{{ author.fullname }}</small> -->
-    <!-- <a href="/author/{{ author.fullname }}/">(about)</a> -->
-    <!-- <a href="{% url author.fullname %}/">(about)</a> -->
-        <a href="author/{% url quote.author %}/">(about)</a>
+<div class="col-md-8">
+
+    {% for quote in quotes %}
+    <div class="quote" itemscope="" itemtype="http://schema.org/CreativeWork">
+        <span class="text" itemprop="text">
+            {{quote.quote}}
         </span>
-        <!-- <div class="tags">
-        Tags:
-        <meta class="keywords" itemprop="keywords" content="life,love" />
+        <span>by <small class="author" itemprop="author">{{quote.author}}</small>
+        <a href="/author/{{quote.author | author_url}}">(about)</a>
+        </span>
+
+        <div class="tags">
+            Tags:
+
+            {% for tag in quote.tags.all %}        
+            <a class="tag" href="/tag/{{tag}}/page/1/">{{tag}}</a>
+            {% endfor %}
+
+        </div>
+    </div>
+    {% endfor %}
+
+    <nav>
+        <ul class="pager">
+            {% if quotes.has_previous %}   
+            <li class="previous">
+                <a href="{% url 'quotesapp:index_paginate' quotes.previous_page_number %}"><span aria-hidden="true">←</span> Previous</a>
+            </li>
+            {% endif%}
+            <li>Page {{quotes.number}} of {{quotes.paginator.num_pages}}</li>
+            {% if quotes.has_next %}
+            <li class="next">
+                <a href="{% url 'quotesapp:index_paginate' quotes.next_page_number %}">Next <span aria-hidden="true">→</span></a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+    </div>
+    <!-- <div class="col-md-4 tags-box">
         
-        <a class="tag" href="/tag/life/page/1/">life</a>
-        
-        <a class="tag" href="/tag/love/page/1/">love</a>
+            <h2>Top Ten tags</h2>
+            
+            <span class="tag-item">
+            <a class="tag" style="font-size: 28px" href="/tag/love/">love</a>
+            </span>
+            
+            <span class="tag-item">
+            <a class="tag" style="font-size: 26px" href="/tag/inspirational/">inspirational</a>
+            </span>
+            
+            <span class="tag-item">
+            <a class="tag" style="font-size: 26px" href="/tag/life/">life</a>
+            </span>
+            
+            <span class="tag-item">
+            <a class="tag" style="font-size: 24px" href="/tag/humor/">humor</a>
+            </span>
+            
+            <span class="tag-item">
+            <a class="tag" style="font-size: 22px" href="/tag/books/">books</a>
+            </span>
+            
+            <span class="tag-item">
+            <a class="tag" style="font-size: 14px" href="/tag/reading/">reading</a>
+            </span>
+            
+            <span class="tag-item">
+            <a class="tag" style="font-size: 10px" href="/tag/friendship/">friendship</a>
+            </span>
+            
+            <span class="tag-item">
+            <a class="tag" style="font-size: 8px" href="/tag/friends/">friends</a>
+            </span>
+            
+            <span class="tag-item">
+            <a class="tag" style="font-size: 8px" href="/tag/truth/">truth</a>
+            </span>
+            
+            <span class="tag-item">
+            <a class="tag" style="font-size: 6px" href="/tag/simile/">simile</a>
+            </span>
+            
         
     </div> -->
-</div>
 
-{% endfor %}
 {% endblock %}

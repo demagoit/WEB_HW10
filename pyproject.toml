@@ -11,6 +11,9 @@ django = "^5.0.3"
 psycopg2-binary = "^2.9.9"
 
 
+[tool.poetry.group.dev.dependencies]
+mongoengine = "^0.28.2"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"

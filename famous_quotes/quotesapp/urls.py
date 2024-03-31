@@ -21,7 +21,8 @@ app_name = 'quotesapp'
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('page/<int:page>', views.index, name='index_paginate'),
     path('author/<str:fullname>', views.author, name='author'),
-    path('tag/<str:tag>', views.tag, name='tag'),
+    path('tag/<int:quote_id>', views.tag, name='tag'),
 
 ]

@@ -1,4 +1,5 @@
-famous-quotes_tmp
+famous_quotes/famous_quotes/utils/config_dev.ini
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
