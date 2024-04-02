@@ -20,8 +20,7 @@ from . import views
 app_name = 'users'
 
 urlpatterns = [
-    # path('', views.index, name='index'),
-    # path('author/<str:fullname>', views.author, name='author'),
-    # path('tag/<str:tag>', views.tag, name='tag'),
-
+    path('signup/', views.signupuser, name='signup'),
+    path('login/', views.loginuser, name='login'),
+    path('logout/', views.logoutuser, name='logout'),
 ]

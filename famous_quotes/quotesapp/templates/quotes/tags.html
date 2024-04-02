@@ -1,0 +1,22 @@
+{% extends "quotes/quote_list.html" %}
+{% block title%}
+<h3>Viewing tag: <a href="/tag/{{selected_tag}}">{{selected_tag}}</a></h3>
+{% endblock %}
+{% block paginator %}
+<nav>
+    <ul class="pager">
+        {% if quotes.has_previous %}   
+        <li class="previous">
+            <a href="/tag/{{selected_tag}}{% url 'quotesapp:index_paginate' quotes.previous_page_number %}"><span aria-hidden="true">←</span> Previous</a>
+        </li>
+        {% endif%}
+        <li>Page {{quotes.number}} of {{quotes.paginator.num_pages}}</li>
+        {% if quotes.has_next %}
+        <li class="next">
+            <a href="/tag/{{selected_tag}}{% url 'quotesapp:index_paginate' quotes.next_page_number %}">Next <span aria-hidden="true">→</span></a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
+
+{% endblock %}

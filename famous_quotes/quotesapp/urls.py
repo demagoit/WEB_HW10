@@ -22,7 +22,10 @@ app_name = 'quotesapp'
 urlpatterns = [
     path('', views.index, name='index'),
     path('page/<int:page>', views.index, name='index_paginate'),
-    path('author/<str:fullname>', views.author, name='author'),
-    path('tag/<int:quote_id>', views.tag, name='tag'),
+    path('author/<str:author_url>', views.author, name='author'),
+    path('tag/<str:tag>', views.tag, name='tag'),
+    path('tag/<str:tag>/page/<int:page>', views.tag, name='tag_paginator'),
+    path('tags/new', views.new_tag, name='new_tag'),
+    path('authors/new', views.new_author, name='new_author'),
 
 ]
