@@ -2,31 +2,30 @@
 
 {% block content %}
 
+<form action="{% url 'users:login' %}" method="post" accept-charset="utf-8">
+    {% csrf_token %}
+    <div class="row">
+        <div class="form-group col-xs-3">
+            <label for="id_username"> Username:</label>
+            {{ form.username }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-xs-3">
+            <label>Password:
+                {{ form.password }}
+            </label>
+            </div>
+    </div>        
 {% if messages %}
-<div>
     {% for message in messages %}
     <div {% if message.tags %} class="alert-{{ message.tags }}" {% endif %}>{{ message }}</div>
     {% endfor %}
-</div>
 {% endif %}
 
-<form action="{% url 'users:login' %}" method="post">
-    {% csrf_token %}
-    <div>
-        <label> Username:
-            {{ form.username }}
-        </label>
-    </div>
-
-    <div>
-        <label>Password:
-            {{ form.password }}
-        </label>
-    </div>
-
     <div class="grid">
-        <button type="submit">Submit</button>
-        <button type="reset" class="secondary">Reset</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="reset" class="btn btn-secondary">Reset</button>
     </div>
 </form>
 

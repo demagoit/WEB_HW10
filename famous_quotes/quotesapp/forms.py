@@ -20,9 +20,10 @@ class AuthorForm(forms.ModelForm):
 
 class QuoteForm(forms.ModelForm):
     quote  = forms.CharField(min_length=3, max_length=50, required=True, strip=True, widget=forms.TextInput())
-    # author  = forms.ForeignKey(Author, on_delete=models.CASCADE)
+    author  = forms.Select() #(Author, on_delete=models.CASCADE)
     # tags = forms.ManyToManyField(Tag)
 
     class Meta:
         model = Quote
-        fields = ['quote', 'author', 'tags']
+        fields = ['quote']
+        exclude = ['tags', 'author']

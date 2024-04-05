@@ -27,5 +27,6 @@ urlpatterns = [
     path('tag/<str:tag>/page/<int:page>', views.tag, name='tag_paginator'),
     path('tags/new', views.new_tag, name='new_tag'),
     path('authors/new', views.new_author, name='new_author'),
+    path('quotes/new', views.new_quote, name='new_quote'),
 
 ]
