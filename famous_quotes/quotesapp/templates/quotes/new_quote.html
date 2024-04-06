@@ -12,21 +12,25 @@
     </div>
     <div style="padding: 10px">
         <label> Select author:
-            <select name="author" required>
+            {{ form.author }}
+            <!-- <select name="author" required>
                 {% for author in authors %}
                 <option value="{{author.fullname}}">{{author.fullname}}</option>
                 {% endfor %}
-            </select>
+            </select> -->
         </label>
+        <span>{{ form.errors.author }}</span>
     </div>
     <div style="padding: 10px">
         <label> Select tags:
-            <select name="tags" multiple="multiple" required>
+            {{ form.tags }}
+            <!-- <select name="tags" multiple="multiple" required>
                 {% for tag in tags %}
                 <option value="{{tag.tag}}">{{tag.tag}}</option>
                 {% endfor %}
-            </select>
+            </select> -->
         </label>
+        <span>{{ form.errors.tags }}</span>
     </div>
     <div class="grid">
         <button type="submit" class="btn btn-primary">Submit</button>

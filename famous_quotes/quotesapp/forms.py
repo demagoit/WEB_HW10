@@ -20,10 +20,17 @@ class AuthorForm(forms.ModelForm):
 
 class QuoteForm(forms.ModelForm):
     quote  = forms.CharField(min_length=3, max_length=50, required=True, strip=True, widget=forms.TextInput())
-    author  = forms.Select() #(Author, on_delete=models.CASCADE)
-    # tags = forms.ManyToManyField(Tag)
+    author = forms.ModelChoiceField(
+        queryset=Author.objects.all().order_by("fullname"),
+        empty_label="Select author",
+        to_field_name='fullname',
+        widget=forms.Select(attrs={"class": "form-select"}))
+    tags = forms.ModelMultipleChoiceField(
+        queryset=Tag.objects.all().order_by("tag"),
+        widget=forms.SelectMultiple(attrs={"size": "7"}),
+        required=False)
 
     class Meta:
         model = Quote
-        fields = ['quote']
-        exclude = ['tags', 'author']
+        fields = ['quote', 'author', 'tags']
+        # exclude = ['tags']
