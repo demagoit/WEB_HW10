@@ -30,9 +30,11 @@ def author(request, author_url):
 def tag(request, tag, page=1):
     tag_id = Tag.objects.get(tag=tag)
     quotes = Quote.objects.filter(tags__in=[tag_id])
+    tags = Tag.objects.annotate(
+        tag_count=Count("quote")).order_by("-tag_count")[:10]
     paginator = Paginator(quotes, per_page=per_page)
     quotes_on_page = paginator.page(page)
-    context = {'quotes': quotes_on_page, 'selected_tag': tag}
+    context = {'quotes': quotes_on_page, 'selected_tag': tag, 'tags': tags}
     return render(request, 'quotes/tags.html', context=context)
 
 
