@@ -1,17 +1,21 @@
-version: "3.9"
 services:
   db:
     container_name: postgres
     image: postgres:16.1
     environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: changeme
-      POSTGRES_DB: mydb
+      POSTGRES_USER: ${PG_USER}
+      POSTGRES_PASSWORD: ${PG_PASSWORD}
+      POSTGRES_DB: ${PG_NAME}
       PGDATA: /var/lib/postgresql/data/pgdata
     ports: 
-      - 5432:5432
+      - ${PG_PORT}:5432
     volumes:
       - type: bind
-        source: ./bd_data
+        source: ${PG_LOCAL_FOLDER}
         target: /var/lib/postgresql/data
 
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - ${ADMINER_PORT}:8080
